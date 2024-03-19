@@ -1,13 +1,4 @@
 import streamlit as st
-import os
-from huggingface_hub import login
-import torch
-import transformers
-import numpy as np
-import pandas as pd
-import json
-import weaviate
-from sentence_transformers import SentenceTransformer
 
 st.set_page_config(page_title="Benefits Q&A Chat")
 
