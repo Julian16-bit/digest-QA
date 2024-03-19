@@ -1,2 +1,2 @@
 streamlit
-U weaviate-client
+
