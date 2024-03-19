@@ -1,6 +1,15 @@
 import streamlit as st
 
-st.set_page_config(page_title="Benefits Q&A Chat")
+conn = st.connection(
+    "weaviate",
+    type=WeaviateConnection,
+    url=os.getenv("https://digest-data-2-vccdanml.weaviate.network"),
+    api_key=os.getenv("Dj76ptxASwSdQuptoSrJnUzsSxnlnxoK7DSK"),
+   )
+
+weav = client.is_live()
+
+st.set_page_config(page_title=weav)
 
 # Replicate Credentials
 with st.sidebar:
