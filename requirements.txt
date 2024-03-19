@@ -1,1 +1,9 @@
 streamlit
+huggingface_hub
+torch
+transformers
+numpy
+pandas 
+json
+weaviate
+sentence_transformers
