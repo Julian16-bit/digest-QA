@@ -7,8 +7,6 @@ conn = st.connection(
     api_key=os.getenv("Dj76ptxASwSdQuptoSrJnUzsSxnlnxoK7DSK"),
    )
 
-weav = client.is_live()
-
 st.set_page_config(page_title="Benefits Q&A Chat")
 
 # Replicate Credentials
