@@ -3,4 +3,4 @@ openai
 llama-index
 llama-index-llms-openai
 poetry 
-
+weaviate
