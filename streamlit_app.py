@@ -9,7 +9,7 @@ conn = st.connection(
 
 weav = client.is_live()
 
-st.set_page_config(page_title=weav)
+st.set_page_config(page_title="Benefits Q&A Chat")
 
 # Replicate Credentials
 with st.sidebar:
