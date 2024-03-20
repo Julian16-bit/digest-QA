@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import weaviate
 
-auth_config = weaviate.AuthApiKey(api_key="Dj76ptxASwSdQuptoSrJnUzsSxnlnxoK7DSK")
+auth_config = weaviate.auth(api_key="Dj76ptxASwSdQuptoSrJnUzsSxnlnxoK7DSK")
 
 client = weaviate.Client(
   url="https://digest-data-2-vccdanml.weaviate.network",
