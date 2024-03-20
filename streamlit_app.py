@@ -13,6 +13,8 @@ client = weaviate.Client(
 model_name = 'sentence-transformers/all-MiniLM-L6-v2'
 vect_model = SentenceTransformer(model_name)
 
+query = 'Can I still receive benefits as a substitute teacher?'
+query_embedding = vect_model.encode(query)
 
 response = (
   client.query
@@ -24,9 +26,6 @@ response = (
 )
 
 st.write(response)
-
-query = 'Can I still receive benefits as a substitute teacher?'
-query_embedding = vect_model.encode(query)
 
 st.set_page_config(page_title="Benefits Q&A Chat")
 
