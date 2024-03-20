@@ -27,7 +27,7 @@ response = (
 contents = [item['content'] for item in response['data']['Get']['Digest2']]
 formatted_text = '\n'.join([f"Supporting Text {i+1}: {item}" for i, item in enumerate(contents)])
 
-st.set_page_config(page_title="Benefits Q&A Chat")
+st.set_page_config(page_title="Benefits Q&A Chat", layout="centered", initial_sidebar_state="auto", menu_items=None)
 
 # Replicate Credentials
 with st.sidebar:
