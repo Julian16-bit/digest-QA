@@ -25,8 +25,6 @@ response = (
   .do()
 )
 
-st.write(response)
-
 st.set_page_config(page_title="Benefits Q&A Chat")
 
 # Replicate Credentials
