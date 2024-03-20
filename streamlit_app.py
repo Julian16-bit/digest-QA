@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import weaviate
+from sentence_transformers import SentenceTransformer
 
 auth_config = weaviate.AuthApiKey(api_key="Dj76ptxASwSdQuptoSrJnUzsSxnlnxoK7DSK")
 
