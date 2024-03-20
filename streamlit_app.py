@@ -63,6 +63,6 @@ if user_input:
   output = completion.choices[0].message
   
   st.write("Chatbot's response:")
-  st.write(completion.choices[0].message["content"])
+  st.write(output.content)
 
 
