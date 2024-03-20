@@ -34,3 +34,4 @@ with st.sidebar:
     st.write('This chatbot is created using the open-source Llama 2 LLM model from Meta.')
     api_token = st.text_input("Enter your Hugging Face API Token:", "")
 
+st.chat_input("Your question")
