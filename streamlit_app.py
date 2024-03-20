@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 
 conn = st.connection(
     "weaviate",
