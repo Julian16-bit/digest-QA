@@ -24,6 +24,8 @@ response = (
   .with_limit(5)
   .do()
 )
+contents = [item['content'] for item in response['data']['Get']['Digest2']]
+formatted_text = '\n'.join([f"Supporting Text {i+1}: {item}" for i, item in enumerate(contents)])
 
 st.set_page_config(page_title="Benefits Q&A Chat")
 
@@ -31,5 +33,6 @@ st.set_page_config(page_title="Benefits Q&A Chat")
 with st.sidebar:
     st.title('"Benefits Q&A Chat"')
     st.write('This chatbot is created using the open-source Llama 2 LLM model from Meta.')
+    api_token = st.text_input("Enter your Hugging Face API Token:", "")
 
 
