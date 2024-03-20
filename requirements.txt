@@ -1,3 +1,4 @@
 streamlit
+--upgrade streamlit
 st-weaviate-connection
 os
