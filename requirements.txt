@@ -1,3 +1,4 @@
 streamlit==1.29.0
 weaviate-client
 sentence-transformers==2.2.2
+openai
