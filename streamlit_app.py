@@ -13,6 +13,18 @@ client = weaviate.Client(
 model_name = 'sentence-transformers/all-MiniLM-L6-v2'
 vect_model = SentenceTransformer(model_name)
 
+def retriever(query):
+  response = (
+    client.query
+    .get("Digest2", ["content", "section_title", "doc_id"])
+    .with_hybrid(query=query, vector=query_embedding)
+    .with_additional(["score"])
+    .with_limit(5)
+    .do()
+    )
+
+st.write(response)
+
 query = 'Can I still receive benefits as a substitute teacher?'
 query_embedding = vect_model.encode(query)
 
