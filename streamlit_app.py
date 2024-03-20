@@ -1,12 +1,6 @@
 import streamlit as st
 import os
-
-conn = st.connection(
-    "weaviate",
-    type=WeaviateConnection,
-    url=os.getenv("https://digest-data-2-vccdanml.weaviate.network"),
-    api_key=os.getenv("Dj76ptxASwSdQuptoSrJnUzsSxnlnxoK7DSK"),
-   )
+import weaviate
 
 st.set_page_config(page_title="Benefits Q&A Chat")
 
