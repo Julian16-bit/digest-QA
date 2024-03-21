@@ -44,7 +44,7 @@ def create_prompt(query):
   Question: {query}
   Answer:
   """
-  return prompt
+  return prompt, content
 
 if user_input:
   prompt = create_prompt(user_input)
@@ -62,5 +62,6 @@ if user_input:
   
   st.write("Chatbot's response:")
   st.write(output.content)
+  at.write(content)
 
 
