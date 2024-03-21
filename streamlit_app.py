@@ -44,10 +44,10 @@ def create_prompt(query):
   Question: {query}
   Answer:
   """
-  return prompt
+  return prompt, contents
 
 if user_input:
-  prompt = create_prompt(user_input)
+  prompt, contents = create_prompt(user_input)
   gpt = OpenAI(api_key=api_token)
 
   completion = gpt.chat.completions.create(
@@ -62,5 +62,6 @@ if user_input:
   
   st.write(f"Chatbot's response to: {user_input}")
   st.write(output.content)
+  st.write(contents)
 
 
