@@ -12,13 +12,12 @@ client = weaviate.Client(
 )
 
 st.title("Benefits Q&A Chat")
-st.write("Enter your question below:")
+st.write('This chatbot is created using the OpenAI GPT-3.5 Turbo model.')
 
-user_input = st.chat_input("Your question")
+user_input = st.chat_input("Enter your question here")
 
 with st.sidebar:
-    st.write('This chatbot is created using the OpenAI GPT-3.5 Turbo model.')
-    api_token = st.text_input("Enter your OpenAI API Token:", "")
+    api_token = st.text_input("Enter your OpenAI API Token:", type='password')
 
 def create_prompt(query):
   model_name = 'sentence-transformers/all-MiniLM-L6-v2'
