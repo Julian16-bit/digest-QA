@@ -4,10 +4,10 @@ import weaviate
 from sentence_transformers import SentenceTransformer
 from openai import OpenAI
 
-auth_config = weaviate.AuthApiKey(api_key="Dj76ptxASwSdQuptoSrJnUzsSxnlnxoK7DSK")
+auth_config = weaviate.AuthApiKey(api_key="uokLNfAvageSXij8kUuTlh53DPBz3HMG5Rc5")
 
 client = weaviate.Client(
-  url="https://digest-data-2-vccdanml.weaviate.network",
+  url="https://digest-data-2-hukgw816.weaviate.network",
   auth_client_secret=auth_config
 )
 
