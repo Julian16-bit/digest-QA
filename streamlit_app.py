@@ -81,7 +81,6 @@ if user_input:
   
   st.session_state.messages.append({"role": "user", "content": user_input})
   st.session_state.messages.append({"role": "assistant", "content": output.content})
-  st.session_state.messages.append({"role": "assistant", "content": results})
   
   st.chat_message("user").markdown(user_input)
   with st.chat_message("assistant", avatar="🍁"):
