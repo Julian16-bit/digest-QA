@@ -69,7 +69,7 @@ user_input = st.chat_input("Enter your question here")
 if user_input:
   # Display user message in chat message container
   with st.chat_message("user"):
-      st.markdown(prompt)
+    st.markdown(prompt)
     # Add user message to chat history
   st.session_state.messages.append({"role": "user", "content": prompt})
   
