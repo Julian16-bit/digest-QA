@@ -32,6 +32,14 @@ def create_prompt(query):
   .with_limit(5)
   .do()
   )
+  all_results = []
+  for item in response['data']['Get']['Digest2']:
+    data = {
+        'score': item['_additional']['score'],
+        'content': item['content'],
+        'doc_id': item['doc_id']
+    }
+    all_results.append(data)
   contents = [item['content'] for item in response['data']['Get']['Digest2']]
   formatted_text = '\n'.join([f"Supporting Text {i+1}: {item}" for i, item in enumerate(contents)])
   prompt = f"""
@@ -44,7 +52,7 @@ def create_prompt(query):
   Question: {query}
   Answer:
   """
-  return prompt, contents
+  return prompt, all_results
 
 if user_input:
   prompt, contents = create_prompt(user_input)
@@ -62,6 +70,6 @@ if user_input:
   
   st.write(f"Chatbot's response to: {user_input}")
   st.write(output.content)
-  st.write(contents)
+  st.write(all_results)
 
 
