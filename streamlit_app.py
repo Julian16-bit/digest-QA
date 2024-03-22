@@ -12,12 +12,9 @@ client = weaviate.Client(
 )
 
 st.set_page_config(layout="wide")
-st.markdown("<h1 style='text-align: center;'>Benefits Q&A Chat</h1>", unsafe_allow_html=True)
-st.markdown("<h2 style='text-align: center;'>This chatbot is created using the OpenAI GPT-3.5 Turbo model.</h2>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; margin-bottom: 100px'>Benefits Q&A Chat</h1>", unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
-
-user_input = st.chat_input("Enter your question here")
 
 with st.sidebar:
     api_token = st.text_input("Enter your OpenAI API Token:", type='password')
@@ -59,6 +56,7 @@ def create_prompt(query):
   """
   return prompt, results
 
+user_input = st.chat_input("Enter your question here")
 if user_input:
   prompt, results = create_prompt(user_input)
   gpt = OpenAI(api_key=api_token)
@@ -78,6 +76,8 @@ if user_input:
     st.write(output.content)
 
   with col2:
-    st.write(results)
+    with st.expander("Click here to see the source"):
+      st.write(results)
+
 
 
