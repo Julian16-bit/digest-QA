@@ -55,24 +55,10 @@ def create_prompt(query):
   Answer:
   """
   return prompt, results
-  
-# Initialize chat history
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-
-# Display chat messages from history on app rerun
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
 
 user_input = st.chat_input("Enter your question here")
+
 if user_input:
-  # Display user message in chat message container
-  with st.chat_message("user"):
-    st.markdown(prompt)
-    # Add user message to chat history
-  st.session_state.messages.append({"role": "user", "content": prompt})
-  
   prompt, results = create_prompt(user_input)
   gpt = OpenAI(api_key=api_token)
 
@@ -87,9 +73,8 @@ if user_input:
   output = completion.choices[0].message
 
   with col1:
-    with st.chat_message("assistant"):
-      st.markdown(output)
-      st.session_state.messages.append({"role": "assistant", "content": output})
+    st.write(f'Chatbot response to: {user_input}')
+    st.write(output)
 
   with col2:
     with st.expander("Click here to see the source"):
