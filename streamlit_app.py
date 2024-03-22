@@ -77,7 +77,7 @@ if user_input:
     st.write(output.content)
 
   with col2:
-    with st.beta_expander("Click here to see the source"):
+    with st.expander("Click here to see the source"):
       st.write(results)
 
 
