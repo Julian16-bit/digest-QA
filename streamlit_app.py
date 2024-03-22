@@ -72,8 +72,8 @@ if user_input:
   output = completion.choices[0].message
 
   with col1:
-    st.write(f"Chatbot's response to: {user_input}")
-    st.write(output.content)
+    st.chat_message("You:", user_input)
+    st.chat_message("Bot:", output.content)
 
   with col2:
     with st.expander("Click here to see the source"):
