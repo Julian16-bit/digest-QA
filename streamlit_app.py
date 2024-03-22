@@ -57,10 +57,10 @@ def create_prompt(query):
   return prompt, results
 
 user_input = st.chat_input("Enter your question here")
-
 if user_input:
   prompt, results = create_prompt(user_input)
   gpt = OpenAI(api_key=api_token)
+
   completion = gpt.chat.completions.create(
   model="gpt-3.5-turbo",
   messages=[
@@ -72,11 +72,9 @@ if user_input:
   output = completion.choices[0].message
 
   with col1:
-    st.write(f"Chatbot response to: {user_input}")
-    st.write(output)
+    st.write(f"Chatbot's response to: {user_input}")
+    st.write(output.content)
 
   with col2:
     with st.expander("Click here to see the source"):
       st.write(results)
-
-
