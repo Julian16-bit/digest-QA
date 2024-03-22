@@ -83,7 +83,9 @@ if user_input:
     st.chat_message("user").markdown(user_input)
     with st.chat_message("assistant"):
         st.markdown(output.content)
-  
-  with col2:
     with st.expander("Click here to see the source"):
       st.write(results)
+  
+  #with col2:
+    #with st.expander("Click here to see the source"):
+      #st.write(results)
