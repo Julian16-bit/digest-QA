@@ -83,8 +83,9 @@ if user_input:
   st.session_state.messages.append({"role": "assistant", "content": output.content})
   
   st.chat_message("user", avatar="💻").markdown(user_input)
-  with st.chat_message("assistant", avatar="🍁"):
-      st.markdown(output.content)
+  with st.spinner("Thinking..."):
+    with st.chat_message("assistant", avatar="🍁"):
+        st.markdown(output.content)
   with st.expander("Click here to see the source"):
     st.write(results)
   
