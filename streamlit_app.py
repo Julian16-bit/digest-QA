@@ -78,5 +78,13 @@ if user_input:
 
   with col2:
     st.write(results)
+    st.markdown(
+    """
+    <script>
+    window.scrollTo(0, 0);
+    </script>
+    """
+    , unsafe_allow_html=True
+  )
 
 
