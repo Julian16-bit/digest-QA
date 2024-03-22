@@ -77,9 +77,6 @@ if user_input:
     st.write(output.content)
 
   with col2:
-    for i, dictionary in enumerate(results):
-      with st.beta_expander(f'Dictionary {i+1}'):
-        for key, value in dictionary.items():
-            st.write(f'{key}: {value}')
+    st.write(results)
 
 
