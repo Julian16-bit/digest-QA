@@ -72,13 +72,7 @@ if user_input:
   
   output = completion.choices[0].message
 
-  with col1:
-    st.write(f"Chatbot's response to: {user_input}")
-    st.write(output.content)
-
-  with col2:
-    st.write(results)
-    st.markdown(
+  st.markdown(
     """
     <script>
     window.scrollTo(0, 0);
@@ -86,5 +80,12 @@ if user_input:
     """
     , unsafe_allow_html=True
   )
+
+  with col1:
+    st.write(f"Chatbot's response to: {user_input}")
+    st.write(output.content)
+
+  with col2:
+    st.write(results)
 
 
