@@ -87,5 +87,6 @@ with col1:
     st.session_state.messages.append({"role": "assistant", "content": output})
   
 with col2:
-  with st.expander("Click here to see the source"):
-    st.write(results)
+  if user_input:
+    with st.expander("Click here to see the source"):
+      st.write(results)
