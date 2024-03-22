@@ -14,8 +14,6 @@ client = weaviate.Client(
 st.set_page_config(layout="wide")
 st.markdown("<h1 style='text-align: center; margin-bottom: 100px'>Benefits Q&A Chat</h1>", unsafe_allow_html=True)
 
-col1, col2 = st.columns(2)
-
 with st.sidebar:
     api_token = st.text_input("Enter your OpenAI API Token:", type='password')
 
@@ -77,14 +75,13 @@ if user_input:
   
   output = completion.choices[0].message
   
-  with col1:
-    st.session_state.messages.append({"role": "user", "content": user_input})
-    st.session_state.messages.append({"role": "assistant", "content": output.content})
-    st.chat_message("user").markdown(user_input)
-    with st.chat_message("assistant"):
-        st.markdown(output.content)
-    with st.expander("Click here to see the source"):
-      st.write(results)
+  st.session_state.messages.append({"role": "user", "content": user_input})
+  st.session_state.messages.append({"role": "assistant", "content": output.content})
+  st.chat_message("user").markdown(user_input)
+  with st.chat_message("assistant"):
+      st.markdown(output.content)
+  with st.expander("Click here to see the source"):
+    st.write(results)
   
   #with col2:
     #with st.expander("Click here to see the source"):
