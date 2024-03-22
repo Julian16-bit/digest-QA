@@ -88,8 +88,8 @@ if user_input:
 
   with col1:
     with st.chat_message("assistant"):
-    st.markdown(output)
-    st.session_state.messages.append({"role": "assistant", "content": output})
+      st.markdown(output)
+      st.session_state.messages.append({"role": "assistant", "content": output})
 
   with col2:
     with st.expander("Click here to see the source"):
