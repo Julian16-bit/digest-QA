@@ -32,14 +32,14 @@ def create_prompt(query):
   .with_limit(5)
   .do()
   )
-  all_results = []
+  
+  results = []
   for item in response['data']['Get']['Digest2']:
-    data = {
-        'score': item['_additional']['score'],
-        'content': item['content'],
-        'doc_id': item['doc_id']
-    }
-    all_results.append(data)
+    score = item['_additional']['score']
+    doc_id = item['doc_id']
+    content = item['content']
+    results.append((score, doc_id, content))
+    
   contents = [item['content'] for item in response['data']['Get']['Digest2']]
   formatted_text = '\n'.join([f"Supporting Text {i+1}: {item}" for i, item in enumerate(contents)])
   prompt = f"""
