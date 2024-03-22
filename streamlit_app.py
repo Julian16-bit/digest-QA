@@ -70,6 +70,6 @@ if user_input:
   
   st.write(f"Chatbot's response to: {user_input}")
   st.write(output.content)
-  st.write(all_results)
+  st.write(results)
 
 
