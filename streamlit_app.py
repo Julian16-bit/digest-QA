@@ -82,7 +82,7 @@ if user_input:
   st.session_state.messages.append({"role": "user", "content": user_input})
   st.session_state.messages.append({"role": "assistant", "content": output.content})
   
-  st.chat_message("human").markdown(user_input)
+  st.chat_message("user", avatar="🧑‍💻").markdown(user_input)
   with st.chat_message("assistant", avatar="🍁"):
       st.markdown(output.content)
   with st.expander("Click here to see the source"):
