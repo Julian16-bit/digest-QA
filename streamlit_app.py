@@ -52,7 +52,7 @@ def create_prompt(query):
   Question: {query}
   Answer:
   """
-  return prompt, all_results
+  return prompt, results
 
 if user_input:
   prompt, contents = create_prompt(user_input)
