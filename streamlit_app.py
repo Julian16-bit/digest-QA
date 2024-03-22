@@ -12,7 +12,6 @@ client = weaviate.Client(
 )
 
 st.set_page_config(layout="wide")
-st.title('Benefits Q&A Chat')
 st.markdown("<h1 style='text-align: center;'>Benefits Q&A Chat</h1>", unsafe_allow_html=True)
 st.markdown("<h2 style='text-align: center;'>This chatbot is created using the OpenAI GPT-3.5 Turbo model.</h2>", unsafe_allow_html=True)
 
