@@ -12,7 +12,7 @@ client = weaviate.Client(
 )
 
 st.set_page_config(layout="wide")
-st.markdown("<h1 style='text-align: center; margin-top: 5px;'>Benefits Q&A Chat</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Benefits Q&A Chat</h1>", unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
 
