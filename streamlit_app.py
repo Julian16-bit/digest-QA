@@ -14,6 +14,8 @@ client = weaviate.Client(
 st.title("Benefits Q&A Chat")
 st.write('This chatbot is created using the OpenAI GPT-3.5 Turbo model.')
 
+col1, col2 = st.columns(2)
+
 user_input = st.chat_input("Enter your question here")
 
 with st.sidebar:
@@ -69,9 +71,12 @@ if user_input:
   )
   
   output = completion.choices[0].message
-  
-  st.write(f"Chatbot's response to: {user_input}")
-  st.write(output.content)
-  st.write(results)
+
+  with col1:
+    st.write(f"Chatbot's response to: {user_input}")
+    st.write(output.content)
+
+  with col2:
+    st.write(results)
 
 
