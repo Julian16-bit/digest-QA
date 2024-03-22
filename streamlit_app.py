@@ -55,7 +55,7 @@ def create_prompt(query):
   return prompt, results
 
 if user_input:
-  prompt, contents = create_prompt(user_input)
+  prompt, results = create_prompt(user_input)
   gpt = OpenAI(api_key=api_token)
 
   completion = gpt.chat.completions.create(
