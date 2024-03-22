@@ -59,6 +59,10 @@ def create_prompt(query):
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
 user_input = st.chat_input("Enter your question here")
 if user_input:
   prompt, results = create_prompt(user_input)
@@ -73,10 +77,9 @@ if user_input:
   
   output = completion.choices[0].message
   
-  st.session_state.messages.append({"role": "user", "content": user_input})
-  st.session_state.messages.append({"role": "assistant", "content": output.content})
-  
   with col1:
+    st.session_state.messages.append({"role": "user", "content": user_input})
+    st.session_state.messages.append({"role": "assistant", "content": output.content})
     st.chat_message("user").markdown(user_input)
     with st.chat_message("assistant"):
         st.markdown(output.content)
