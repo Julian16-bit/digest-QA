@@ -78,11 +78,11 @@ if user_input:
   output = completion.choices[0].message
   
   with col1:
+    st.session_state.messages.append({"role": "user", "content": user_input})
+    st.session_state.messages.append({"role": "assistant", "content": output.content})
     st.chat_message("user").markdown(user_input)
     with st.chat_message("assistant"):
         st.markdown(output.content)
-    st.session_state.messages.append({"role": "user", "content": user_input})
-    st.session_state.messages.append({"role": "assistant", "content": output.content})
   
   with col2:
     with st.expander("Click here to see the source"):
