@@ -74,7 +74,9 @@ if user_input:
   with col1:
     st.write(f"Chatbot answer to: {user_input}")
     st.write(output.content)
-
+    
+  st.markdown("<hr>", unsafe_allow_html=True)
+  
   with col2:
     with st.expander("Click here to see the source"):
       st.write(results)
