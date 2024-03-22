@@ -16,8 +16,6 @@ st.markdown("<h1 style='text-align: center;'>Benefits Q&A Chat</h1>", unsafe_all
 
 col1, col2 = st.columns(2)
 
-user_input = st.chat_input("Enter your question here")
-
 with st.sidebar:
     api_token = st.text_input("Enter your OpenAI API Token:", type='password')
 
@@ -58,6 +56,7 @@ def create_prompt(query):
   """
   return prompt, results
 
+user_input = st.chat_input("Enter your question here")
 if user_input:
   prompt, results = create_prompt(user_input)
   gpt = OpenAI(api_key=api_token)
