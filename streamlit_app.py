@@ -11,6 +11,7 @@ client = weaviate.Client(
   auth_client_secret=auth_config
 )
 
+st.set_page_config(layout="wide")
 st.title("Benefits Q&A Chat")
 st.write('This chatbot is created using the OpenAI GPT-3.5 Turbo model.')
 
