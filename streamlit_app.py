@@ -75,15 +75,16 @@ if user_input:
   output = completion.choices[0].message
 
 with col1:
-  if "messages" not in st.session_state:
-    st.session_state.messages = []
-  for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-      st.markdown(message["content"])
-  with st.chat_message("assistant"):
-    st.markdown(output)
+  if user_input:
+    if "messages" not in st.session_state:
+      st.session_state.messages = []
+    for message in st.session_state.messages:
+      with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+    with st.chat_message("assistant"):
+      st.markdown(output)
 
-  st.session_state.messages.append({"role": "assistant", "content": output})
+    st.session_state.messages.append({"role": "assistant", "content": output})
   
 with col2:
   with st.expander("Click here to see the source"):
