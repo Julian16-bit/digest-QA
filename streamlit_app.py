@@ -68,10 +68,15 @@ if user_input:
     {"role": "user", "content": prompt}
   ]
   )
-  
   output = completion.choices[0].message
 
   with col1:
+    if "messages" not in st.session_state:
+      st.session_state.messages = []
+    for message in st.session_state.messages:
+      with st.chat_message(message["role"]):
+        st.markdown(message["content")
+        
     st.write(f"Chatbot's response to: {user_input}")
     st.write(output.content)
 
