@@ -58,13 +58,12 @@ def create_prompt(query):
 
 user_input = st.chat_input("Enter your question here")
 if user_input:
+  prompt, results = create_prompt(user_input)
   with st.chat_message("user"):
     st.markdown(prompt)
   st.session_state.messages.append({"role": "user", "content": prompt})
-      
-  prompt, results = create_prompt(user_input)
+  
   gpt = OpenAI(api_key=api_token)
-
   completion = gpt.chat.completions.create(
   model="gpt-3.5-turbo",
   messages=[
