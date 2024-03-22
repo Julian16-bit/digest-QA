@@ -59,8 +59,8 @@ def create_prompt(query):
 user_input = st.chat_input("Enter your question here")
 if user_input:
   prompt, results = create_prompt(user_input)
-  
   gpt = OpenAI(api_key=api_token)
+
   completion = gpt.chat.completions.create(
   model="gpt-3.5-turbo",
   messages=[
@@ -68,25 +68,13 @@ if user_input:
     {"role": "user", "content": prompt}
   ]
   )
+  
   output = completion.choices[0].message
 
   with col1:
-      with st.chat_message("user"):
-        st.markdown(user_input)
-      st.session_state.messages.append({"role": "user", "content": user_input})
-    
-      if "messages" not in st.session_state:
-        st.session_state.messages = []
-        
-      for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-          st.markdown(message["content"])
-          
-      with st.chat_message("assistant"):
-        st.markdown(output.content)
+    st.write(f"Chatbot's response to: {user_input}")
+    st.write(output.content)
 
-      st.session_state.messages.append({"role": "assistant", "content": output.content})
-  
   with col2:
-      with st.expander("Click here to see the source"):
-        st.write(results)
+    with st.expander("Click here to see the source"):
+      st.write(results)
