@@ -13,7 +13,7 @@ client = weaviate.Client(
 
 st.set_page_config(layout="wide")
 st.markdown("<h1 style='text-align: center;'>Benefits Q&A Chat</h1>", unsafe_allow_html=True)
-st.markdown("<h2 style='text-align: center;'>This chatbot is created using the OpenAI GPT-3.5 Turbo model.</h2>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center;'>This chatbot is created using the OpenAI GPT-3.5 Turbo model.</h3>", unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
 
