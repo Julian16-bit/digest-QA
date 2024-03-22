@@ -16,10 +16,6 @@ st.markdown("<h1 style='text-align: center; margin-bottom: 100px'>Benefits Q&A C
 
 with st.sidebar:
     api_token = st.text_input("Enter your OpenAI API Token:", type='password')
-    if not (api_token.startswith('sk-'):
-            st.warning('Please enter your credentials!', icon='⚠️')
-        else:
-            st.success('Proceed to entering your prompt message!')
 
 def create_prompt(query):
   model_name = 'sentence-transformers/all-MiniLM-L6-v2'
