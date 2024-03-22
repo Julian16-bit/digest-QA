@@ -56,35 +56,35 @@ def create_prompt(query):
   """
   return prompt, results
 
+user_input = st.chat_input("Enter your question here")
+if user_input:
+  with st.chat_message("user"):
+    st.markdown(prompt)
+  st.session_state.messages.append({"role": "user", "content": prompt})
+      
+  prompt, results = create_prompt(user_input)
+  gpt = OpenAI(api_key=api_token)
+
+  completion = gpt.chat.completions.create(
+  model="gpt-3.5-turbo",
+  messages=[
+    {"role": "system", "content": "an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses only based on the provided context. If the answer cannot be found within the provided documents, respond with 'I don't have an answer for this question.' Be as concise and polite in your response as possible. "},
+    {"role": "user", "content": prompt}
+  ]
+  )
+  output = completion.choices[0].message
+
 with col1:
   if "messages" not in st.session_state:
     st.session_state.messages = []
   for message in st.session_state.messages:
     with st.chat_message(message["role"]):
       st.markdown(message["content"])
-  user_input = st.chat_input("Enter your question here")
-  if user_input:
-    with st.chat_message("user"):
-      st.markdown(prompt)
-    st.session_state.messages.append({"role": "user", "content": prompt})
-      
-    prompt, results = create_prompt(user_input)
-    gpt = OpenAI(api_key=api_token)
-
-    completion = gpt.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[
-      {"role": "system", "content": "an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses only based on the provided context. If the answer cannot be found within the provided documents, respond with 'I don't have an answer for this question.' Be as concise and polite in your response as possible. "},
-      {"role": "user", "content": prompt}
-    ]
-    )
-    output = completion.choices[0].message
-    
   with st.chat_message("assistant"):
     st.markdown(output)
 
   st.session_state.messages.append({"role": "assistant", "content": output})
-
+  
 with col2:
   with st.expander("Click here to see the source"):
     st.write(results)
