@@ -75,7 +75,7 @@ if user_input:
       st.session_state.messages = []
     for message in st.session_state.messages:
       with st.chat_message(message["role"]):
-        st.markdown(message["content")
+        st.markdown(message["content"])
         
     st.write(f"Chatbot's response to: {user_input}")
     st.write(output.content)
