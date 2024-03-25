@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import torch
 import weaviate
-from sentence_transformers import SentenceTransformer
+from sentence_transformers import SentenceTransformer, CrossEncoder
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from openai import OpenAI
 
@@ -22,9 +22,7 @@ with st.sidebar:
 def create_prompt(query):
   model_name = 'sentence-transformers/all-MiniLM-L6-v2'
   vect_model = SentenceTransformer(model_name)
-  reranker_tokenizer = AutoTokenizer.from_pretrained('BAAI/bge-m3')
-  reranker_model = AutoModelForSequenceClassification.from_pretrained('BAAI/bge-reranker-base')
-  reranker_model.eval()
+  reranker_model = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
   query1 = query
   query_embedding = vect_model.encode(query1)
   response = (
@@ -32,7 +30,7 @@ def create_prompt(query):
   .get("Digest2", ["content", "section_title", "doc_id"])
   .with_hybrid(query=query1, vector=query_embedding)
   .with_additional(["score"])
-  .with_limit(5)
+  .with_limit(20)
   .do()
   )
   
@@ -47,20 +45,16 @@ def create_prompt(query):
 
   query_doc_pairs = [[query, res["content"]] for res in response["data"]["Get"]["Digest2"]]
 
-  scores = []
+  scores = reranker_model.predict(query_doc_pairs)
+  print(scores)
 
-  with torch.no_grad():
-    inputs = reranker_tokenizer(query_doc_pairs, padding=True, truncation=True, return_tensors='pt', max_length=512)
-    scores = reranker_model(**inputs, return_dict=True).logits.view(-1, ).float()
-    print(scores)
-
-  # top_n = 3 ### Cap number of documents that are sent to LLM for RAG
+  top_n = 3 ### Cap number of documents that are sent to LLM for RAG
   scores_cp = scores.tolist()
   documents = [pair[1] for pair in query_doc_pairs]
   content = ""
 
   for idx in range(len(scores_cp)):
-    if scores_cp[idx] >= 1:
+    if scores_cp[idx] >= 0:
       content += documents[idx]
     
   prompt = f"""
