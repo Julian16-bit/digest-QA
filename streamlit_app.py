@@ -1,7 +1,9 @@
 import streamlit as st
 import os
+import torch
 import weaviate
 from sentence_transformers import SentenceTransformer
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from openai import OpenAI
 
 auth_config = weaviate.AuthApiKey(api_key="uokLNfAvageSXij8kUuTlh53DPBz3HMG5Rc5")
@@ -16,6 +18,10 @@ st.markdown("<h1 style='text-align: center; margin-bottom: 100px'>Benefits Q&A C
 
 with st.sidebar:
     api_token = st.text_input("Enter your OpenAI API Token:", type='password')
+
+reranker_tokenizer = AutoTokenizer.from_pretrained('BAAI/bge-reranker-large')
+reranker_model = AutoModelForSequenceClassification.from_pretrained('BAAI/bge-reranker-large')
+reranker_model.eval()
 
 def create_prompt(query):
   model_name = 'sentence-transformers/all-MiniLM-L6-v2'
@@ -39,16 +45,32 @@ def create_prompt(query):
         'content': item['content']
     }
     results.append(result)
+
+  query_doc_pairs = [[query, res["content"]] for res in response["data"]["Get"]["Digest2"]]
+
+  scores = []
+
+  with torch.no_grad():
+    inputs = reranker_tokenizer(query_doc_pairs, padding=True, truncation=True, return_tensors='pt', max_length=512)
+    scores = reranker_model(**inputs, return_dict=True).logits.view(-1, ).float()
+    print(scores)
+
+  # top_n = 3 ### Cap number of documents that are sent to LLM for RAG
+  scores_cp = scores.tolist()
+  documents = [pair[1] for pair in query_doc_pairs]
+  content = ""
+
+  for idx in range(len(scores_cp)):
+    if scores_cp[idx] >= 1:
+      content += documents[idx]
     
-  contents = [item['content'] for item in response['data']['Get']['Digest2']]
-  formatted_text = '\n'.join([f"Supporting Text {i+1}: {item}" for i, item in enumerate(contents)])
   prompt = f"""
   As an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses
   based on the provided context. If the answer cannot be found within the provided documents, respond with 'I don't have
   an answer for this question.' Be as concise and polite in your response as possible. The provided context contains the
   principles applied in the Employment Insurance (EI) program, and the question is also related to the EI program.
 
-  context: {formatted_text}
+  context: {content}
   Question: {query}
   Answer:
   """
