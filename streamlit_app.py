@@ -22,8 +22,8 @@ with st.sidebar:
 def create_prompt(query):
   model_name = 'sentence-transformers/all-MiniLM-L6-v2'
   vect_model = SentenceTransformer(model_name)
-  reranker_tokenizer = AutoTokenizer.from_pretrained('BAAI/bge-reranker-large')
-  reranker_model = AutoModelForSequenceClassification.from_pretrained('BAAI/bge-reranker-large')
+  reranker_tokenizer = AutoTokenizer.from_pretrained('BAAI/bge-m3')
+  reranker_model = AutoModelForSequenceClassification.from_pretrained('BAAI/bge-reranker-base')
   reranker_model.eval()
   query1 = query
   query_embedding = vect_model.encode(query1)
