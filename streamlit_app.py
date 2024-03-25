@@ -77,7 +77,7 @@ if user_input:
     {"role": "system", "content": "an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses only based on the provided context. If the answer cannot be found within the provided documents, respond with 'I don't have an answer for this question.' Be as concise and polite in your response as possible. "},
     {"role": "user", "content": prompt}
   ],
-    temperature=temperature_selection
+    temperature=temperature_selection,
     top_p=top_p_selection
   )
   
