@@ -16,7 +16,7 @@ st.markdown("<h1 style='text-align: center; margin-bottom: 100px'>Benefits Q&A C
 
 with st.sidebar:
     api_token = st.text_input("Enter your OpenAI API Token:", type='password')
-    temperature_selection = st.sidebar.slider('Temperature', min_value=0.0, max_value=2.0, value=1.0, step=0.1)
+    temperature_selection = st.sidebar.slider('Temperature', min_value=0.0, max_value=2.0, value=1.0, step=0.05)
 
 def create_prompt(query):
   model_name = 'sentence-transformers/all-MiniLM-L6-v2'
