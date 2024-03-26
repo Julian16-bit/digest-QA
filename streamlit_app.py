@@ -65,8 +65,6 @@ def create_prompt(query, grade):
 
     del documents[index]
     del scores_cp[index]
-
-  results = content
     
   prompt = f"""
   As an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses
