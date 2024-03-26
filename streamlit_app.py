@@ -26,7 +26,7 @@ def create_prompt(query):
   query_embedding = vect_model.encode(query1)
   response = (
   client.query
-  .get("Digest2", ["content", "section_title", "doc_id"])
+  .get("Digest2", ["content", "section_title", "doc_id", "section_chapter"])
   .with_hybrid(query=query1, vector=query_embedding)
   .with_additional(["score"])
   .with_limit(5)
