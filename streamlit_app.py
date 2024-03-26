@@ -20,7 +20,7 @@ with st.sidebar:
     api_token = st.text_input("Enter your OpenAI API Token:", type='password')
     temperature_selection = st.sidebar.slider('Temperature', min_value=0.0, max_value=2.0, value=1.0, step=0.05)
     top_p_selection = st.sidebar.slider('Top_p', min_value=0.0, max_value=1.0, value=1.0, step=0.05)
-    grade_level = st.selectbox('Choose the level of complexity',('sixth grade', 'seventh grade', 'eighth grade', 'ninth grade', 'tenth grade', 'eleventh grade', 'twelfth grade', 'first year college', 'second year college', 'third year college', 'fourth year college' ))
+    grade_level = st.selectbox('Choose the level of complexity',('elementary school', 'middle school', 'high school', 'college' ))
     st.write('You selected:', grade_level)
 
 def create_prompt(query, grade):
