@@ -41,7 +41,6 @@ def create_prompt(query):
     result = {
         'doc_id': item['doc_id'],
         'section_title': item['section_title'],
-        'section_chapter': item['section_chapter'],
         'score': item['_additional']['score'],
         'content': item['content']
     }
