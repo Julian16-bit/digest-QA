@@ -23,7 +23,7 @@ with st.sidebar:
     # grade_level = st.selectbox('Choose the level of complexity',('elementary school', 'middle school', 'high school', 'college' ))
     # st.write('You selected:', grade_level)
 
-def create_prompt(query, grade):
+def create_prompt(query):
   model_name = 'sentence-transformers/all-MiniLM-L6-v2'
   vect_model = SentenceTransformer(model_name)
   reranker_model = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
