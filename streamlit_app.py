@@ -69,8 +69,8 @@ def create_prompt(query):
   prompt = f"""
   As an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses
   based on the provided context. If the answer cannot be found within the provided documents, respond with 'I don't have
-  an answer for this question.' Be as concise and polite as possible and use simple language. 
-  The provided context contains the principles applied in the Employment Insurance (EI) program, and the question is also related to the EI program.
+  an answer for this question.' Be as concise and polite in your response as possible, and use simple language. The provided context contains the
+  principles applied in the Employment Insurance (EI) program, and the question is also related to the EI program.
 
   Context: {content}
   Question: {query}
