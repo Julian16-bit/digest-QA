@@ -16,7 +16,7 @@ st.markdown("<h1 style='text-align: center; margin-bottom: 100px'>Benefits Q&A C
 st.markdown("""
     <style>
     [data-testid="stSidebar"]{
-    background-color: #BEBEBE;  
+    background-color: #3972BA;  
         }
     </style>
 """, unsafe_allow_html=True)
