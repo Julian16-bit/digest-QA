@@ -20,8 +20,9 @@ with st.sidebar:
     api_token = st.text_input("Enter your OpenAI API Token:", type='password')
     temperature_selection = st.sidebar.slider('Temperature', min_value=0.0, max_value=2.0, value=1.0, step=0.05)
     top_p_selection = st.sidebar.slider('Top_p', min_value=0.0, max_value=1.0, value=1.0, step=0.05)
+    grade_level = st.selectbox('Choose the level of complexity',('sixth grade', 'seventh grade', 'eighth grade', 'ninth grade', 'tenth grade', 'eleventh grade', 'twelfth grade', 'first year college', 'second year college', 'third year college', 'fourth year college' ))
 
-def create_prompt(query):
+def create_prompt(query, grade):
   model_name = 'sentence-transformers/all-MiniLM-L6-v2'
   vect_model = SentenceTransformer(model_name)
   reranker_model = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
@@ -69,10 +70,10 @@ def create_prompt(query):
   prompt = f"""
   As an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses
   based on the provided context. If the answer cannot be found within the provided documents, respond with 'I don't have
-  an answer for this question.' Be as concise and polite as possible, and use simple language in your response. Respond as if I am in the eigth grade. 
+  an answer for this question.' Be as concise and polite as possible, and use simple language in your response. Respond as if I am in {grade}. 
   The provided context contains the principles applied in the Employment Insurance (EI) program, and the question is also related to the EI program.
 
-  context: {content}
+  Context: {content}
   Question: {query}
   Answer:
   """
@@ -91,7 +92,7 @@ for message in st.session_state.messages:
 
 user_input = st.chat_input("Enter your question here")
 if user_input:
-  prompt, results = create_prompt(user_input)
+  prompt, results = create_prompt(user_input, grade_level)
   gpt = OpenAI(api_key=api_token)
   completion = gpt.chat.completions.create(
   model="gpt-3.5-turbo",
