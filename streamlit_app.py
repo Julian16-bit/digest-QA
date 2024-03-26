@@ -99,13 +99,15 @@ if user_input:
   )
   
   output = completion.choices[0].message
+  content_output = output.content
+  clean_output = content_output.replace("$", "\$")
   
   st.session_state.messages.append({"role": "user", "content": user_input})
-  st.session_state.messages.append({"role": "assistant", "content": output.content})
+  st.session_state.messages.append({"role": "assistant", "content": clean_output})
   
   st.chat_message("user").markdown(user_input)
   with st.chat_message("assistant"):
-      st.markdown(output.content)
+      st.markdown(clean_output)
   with st.expander("Click here to see the source"):
     st.write(results)
   
