@@ -52,14 +52,17 @@ def create_prompt(query):
   scores = reranker_model.predict(query_doc_pairs)
   print(scores)
 
-  top_n = 3 ### Cap number of documents that are sent to LLM for RAG
+  top_n = 5 ### Cap number of documents that are sent to LLM for RAG
   scores_cp = scores.tolist()
   documents = [pair[1] for pair in query_doc_pairs]
   content = ""
 
-  for idx in range(len(scores_cp)):
-    if scores_cp[idx] >= 0:
-      content += documents[idx]
+  for _ in range(top_n):
+    index = scores_cp.index(max(scores_cp))
+    content += documents[index]
+
+    del documents[index]
+    del scores_cp[index]
     
   prompt = f"""
   As an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses
