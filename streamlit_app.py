@@ -70,7 +70,7 @@ def create_prompt(query, grade):
   prompt = f"""
   As an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses
   based on the provided context. If the answer cannot be found within the provided documents, respond with 'I don't have
-  an answer for this question.' Be as concise and polite as possible, and use simple language in your response. Respond as if I am in {grade}. 
+  an answer for this question.' Be as concise and polite as possible. Respond as if I am in {grade}. 
   The provided context contains the principles applied in the Employment Insurance (EI) program, and the question is also related to the EI program.
 
   Context: {content}
@@ -97,7 +97,7 @@ if user_input:
   completion = gpt.chat.completions.create(
   model="gpt-3.5-turbo",
   messages=[
-    {"role": "system", "content": "an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses only based on the provided context. If the answer cannot be found within the provided documents, respond with 'I don't have an answer for this question.' Be as concise and polite in your response as possible. "},
+    {"role": "system", "content": f"an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses only based on the provided context. If the answer cannot be found within the provided documents, respond with 'I don't have an answer for this question.' Be as concise and polite in your response as possible. Respond as if I am in {grade_level}."},
     {"role": "user", "content": prompt}
   ],
     temperature=temperature_selection,
