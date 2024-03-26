@@ -15,7 +15,7 @@ st.set_page_config(layout="wide")
 st.markdown("<h1 style='text-align: center; margin-bottom: 100px'>Benefits Q&A Chat</h1>", unsafe_allow_html=True)
 st.markdown("""
     <style>
-    [data-testid="stAppViewContainer"]{
+    [data-testid="stSidebar"]{
     background-color: #BEBEBE;  
         }
     </style>
