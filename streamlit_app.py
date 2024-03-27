@@ -152,5 +152,8 @@ if st.sidebar.button('Get Evaluation Metric'):
       query_response_pairs.append(pair)
       
     similarity, precision, recall, f1 = evaluation(query_response_pairs)
-    st.write(similarity)
+    st.write(f"The similarity score is {similarity}")
+    st.write(f"The precision score is {precision}")
+    st.write(f"The recall score is {recall}")
+    st.write(f"The f1 score is {f1}")
         
