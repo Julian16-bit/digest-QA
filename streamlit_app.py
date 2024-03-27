@@ -130,8 +130,13 @@ if user_input:
   
   query_response_pairs = []
   query_response_pairs.append([user_input, clean_output])
+
+  def hello(input):
+    st.write(input)
+
+  message = "test"
   
-  st.sidebar.button('Get Evaluation Metric', on_click=evaluation(query_response_pairs))
+  st.sidebar.button('Get Evaluation Metric', on_click=hello(message)
       
   st.chat_message("user").markdown(user_input)
   with st.chat_message("assistant"):
