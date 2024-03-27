@@ -15,11 +15,6 @@ client = weaviate.Client(
   auth_client_secret=auth_config
 )
 
-query_response_pairs = []
-def save_pair(query, answer):
-  global query_response_pairs
-  query_response_pairs.append([query, answer])
-
 st.set_page_config(layout="wide")
 st.markdown("<h1 style='text-align: center; margin-bottom: 100px'>Benefits Q&A Chat</h1>", unsafe_allow_html=True)
 
@@ -134,9 +129,8 @@ if user_input:
   st.session_state.messages.append({"role": "user", "content": user_input})
   st.session_state.messages.append({"role": "assistant", "content": clean_output})
   
-  save_pair(user_input, clean_output)
-    with st.sidebar:
-      st.write(query_response_pairs)
+  query_response_pairs = []
+  query_response_pairs.append([user_input, clean_output])
       
   st.chat_message("user").markdown(user_input)
   with st.chat_message("assistant"):
