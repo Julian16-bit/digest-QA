@@ -106,6 +106,8 @@ if "messages" not in st.session_state:
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
+      
+query_response_pairs = []
 
 user_input = st.chat_input("Enter your question here")
 if user_input:
@@ -128,7 +130,6 @@ if user_input:
   st.session_state.messages.append({"role": "user", "content": user_input})
   st.session_state.messages.append({"role": "assistant", "content": clean_output})
   
-  query_response_pairs = []
   query_response_pairs.append([user_input, clean_output])
       
   st.chat_message("user").markdown(user_input)
@@ -137,12 +138,9 @@ if user_input:
   with st.expander("Click here to see the source"):
     st.write(results)
 
-def hello(input):
-  st.write(input)
-
-input = "test"
-
 if st.sidebar.button('Get Evaluation Metric'):
   with st.sidebar:
-    test = hello(input)
-    st.write(test)
+    if len(query_response_pairs) == 0:
+      st.write("No data to evaluate!")
+    else:
+      st.write(query_response_pairs)
