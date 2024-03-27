@@ -103,7 +103,6 @@ def evaluation(query_response_pairs):
   return statistics.mean(similarity), statistics.mean(results['precision']), statistics.mean(results['recall']), statistics.mean(results['f1'])
 
 
-
 st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 st.sidebar.button('Get Evaluation Metric', on_click=evaluation(query_response_pairs))
 
@@ -136,7 +135,9 @@ if user_input:
   st.session_state.messages.append({"role": "assistant", "content": clean_output})
   
   save_pair(user_input, clean_output)
-  
+    with st.sidebar:
+      st.write(query_response_pairs)
+      
   st.chat_message("user").markdown(user_input)
   with st.chat_message("assistant"):
       st.markdown(clean_output)
