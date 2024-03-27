@@ -143,11 +143,8 @@ if user_input:
 
 if st.sidebar.button('Get Evaluation Metric'):
   with st.sidebar:
-    if len(query_response_pairs) == 0:
-      st.write("No data to evaluate!")
-    else:
-      query_response_pairs = []
-      for message in st.session_state.messages:
-        query_response_pairs.append([message["role"]], [message["content"]])
-      st.write(query_response_pairs)
+    query_response_pairs = []
+    for message in st.session_state.messages:
+      query_response_pairs.append([message["role"]], [message["content"]])
+    st.write(query_response_pairs)
         
