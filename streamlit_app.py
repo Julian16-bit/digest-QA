@@ -143,7 +143,7 @@ if user_input:
 
 if st.sidebar.button('Get Evaluation Metric'):
   with st.sidebar:
-    query_response_pairs = []
+    query_response= []
     for message in st.session_state.messages:
       query_response.append(message["content"])
     query_response_pairs = []
