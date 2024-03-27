@@ -2,9 +2,11 @@ import streamlit as st
 import os
 import torch
 import weaviate
+import statistics
 from sentence_transformers import SentenceTransformer, CrossEncoder
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from openai import OpenAI
+from evaluate import load
 
 auth_config = weaviate.AuthApiKey(api_key="uokLNfAvageSXij8kUuTlh53DPBz3HMG5Rc5")
 
@@ -12,6 +14,11 @@ client = weaviate.Client(
   url="https://digest-data-2-hukgw816.weaviate.network",
   auth_client_secret=auth_config
 )
+
+query_response_pairs = []
+def save_pair(query, answer):
+  global query_response_pairs
+  query_response_pairs.append([query, answer])
 
 st.set_page_config(layout="wide")
 st.markdown("<h1 style='text-align: center; margin-bottom: 100px'>Benefits Q&A Chat</h1>", unsafe_allow_html=True)
@@ -82,9 +89,20 @@ def clear_chat_history():
     st.session_state.messages = []
 
 def evaluation(query_response_pairs):
-  pass
+  ### Compute the semantic similarity score using cross encoder
+  eval_model = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
+  similarity = eval_model.predict(query_response_pairs)
 
-query_response_pairs = []
+
+  ### Compute the precision, recall, and f score using bert_score model
+  bertscore = load("bertscore")
+  query = [pair[0] for pair in query_response_pairs]
+  answer = [pair[1] for pair in query_response_pairs]
+  results = bertscore.compute(predictions=answer, references=query, lang="en", num_layers=2) # Research says the correctness is the best when using second layer ouput as embeddings
+  
+  return statistics.mean(similarity), statistics.mean(results['precision']), statistics.mean(results['recall']), statistics.mean(results['f1'])
+
+
 
 st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 st.sidebar.button('Get Evaluation Metric', on_click=evaluation(query_response_pairs))
@@ -116,6 +134,8 @@ if user_input:
   
   st.session_state.messages.append({"role": "user", "content": user_input})
   st.session_state.messages.append({"role": "assistant", "content": clean_output})
+  
+  save_pair(user_input, clean_output)
   
   st.chat_message("user").markdown(user_input)
   with st.chat_message("assistant"):
