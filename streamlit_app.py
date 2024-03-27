@@ -25,10 +25,10 @@ with st.sidebar:
     # grade_level = st.selectbox('Choose the level of complexity',('elementary school', 'middle school', 'high school', 'college' ))
     # st.write('You selected:', grade_level)
 
-query_response_pairs = []
-def save_pair(query, answer):
-  global query_response_pairs
-  query_response_pairs.append([query, answer])
+# query_response_pairs = []
+# def save_pair(query, answer):
+  # global query_response_pairs
+  # query_response_pairs.append([query, answer])
 
 def create_prompt(query):
   model_name = 'sentence-transformers/all-MiniLM-L6-v2'
