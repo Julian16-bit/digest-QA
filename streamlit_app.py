@@ -2,11 +2,9 @@ import streamlit as st
 import os
 import torch
 import weaviate
-import statistics
 from sentence_transformers import SentenceTransformer, CrossEncoder
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from openai import OpenAI
-from evaluate import load
 
 auth_config = weaviate.AuthApiKey(api_key="uokLNfAvageSXij8kUuTlh53DPBz3HMG5Rc5")
 
@@ -24,11 +22,6 @@ with st.sidebar:
     top_p_selection = st.sidebar.slider('Top_p', min_value=0.0, max_value=1.0, value=1.0, step=0.05)
     # grade_level = st.selectbox('Choose the level of complexity',('elementary school', 'middle school', 'high school', 'college' ))
     # st.write('You selected:', grade_level)
-
-# query_response_pairs = []
-# def save_pair(query, answer):
-  # global query_response_pairs
-  # query_response_pairs.append([query, answer])
 
 def create_prompt(query):
   model_name = 'sentence-transformers/all-MiniLM-L6-v2'
@@ -88,21 +81,6 @@ def create_prompt(query):
 def clear_chat_history():
     st.session_state.messages = []
 
-def evaluation(query_response_pairs):
-  ### Compute the semantic similarity score using cross encoder
-  eval_model = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
-  similarity = eval_model.predict(query_response_pairs)
-
-
-  ### Compute the precision, recall, and f score using bert_score model
-  bertscore = load("bertscore")
-  query = [pair[0] for pair in query_response_pairs]
-  answer = [pair[1] for pair in query_response_pairs]
-  results = bertscore.compute(predictions=answer, references=query, lang="en", num_layers=2) # Research says the correctness is the best when using second layer ouput as embeddings
-  
-  return statistics.mean(similarity), statistics.mean(results['precision']), statistics.mean(results['recall']), statistics.mean(results['f1'])
-
-
 st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 
 if "messages" not in st.session_state:
@@ -132,31 +110,14 @@ if user_input:
   
   st.session_state.messages.append({"role": "user", "content": user_input})
   st.session_state.messages.append({"role": "assistant", "content": clean_output})
-
-  # save_pair(user_input, clean_output)
-      
+  
   st.chat_message("user").markdown(user_input)
   with st.chat_message("assistant"):
       st.markdown(clean_output)
   with st.expander("Click here to see the source"):
     st.write(results)
-
-if st.sidebar.button('Get Evaluation Metric'):
-  with st.sidebar:
-    if len(st.session_state.messages) == 0:
-      st.write("No messages to evaluate!")
-    else:
-      query_response= []
-      for message in st.session_state.messages:
-        query_response.append(message["content"])
-      query_response_pairs = []
-      for i in range(0, len(query_response), 2):
-        pair = [query_response[i], query_response[i + 1]]
-        query_response_pairs.append(pair)
-        
-      similarity, precision, recall, f1 = evaluation(query_response_pairs)
-      st.write(f"The similarity score is: {round(similarity, 3)}")
-      st.write(f"The precision score is: {round(precision, 3)}")
-      st.write(f"The recall score is: {round(recall, 3)}")
-      st.write(f"The f1 score is: {round(f1, 3)}")
+  
+  #with col2:
+    #with st.expander("Click here to see the source"):
+      #st.write(results)
           
