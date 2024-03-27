@@ -150,5 +150,7 @@ if st.sidebar.button('Get Evaluation Metric'):
     for i in range(0, len(query_response), 2):
       pair = [query_response[i], query_response[i + 1]]
       query_response_pairs.append(pair)
-    st.write(query_response_pairs)
+      
+    similarity, precision, recall, f1 = evaluation(query_response_pairs)
+    st.write(similarity)
         
