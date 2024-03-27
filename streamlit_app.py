@@ -133,7 +133,7 @@ if user_input:
   st.session_state.messages.append({"role": "user", "content": user_input})
   st.session_state.messages.append({"role": "assistant", "content": clean_output})
 
-  save_pair(user_input, clean_output)
+  # save_pair(user_input, clean_output)
       
   st.chat_message("user").markdown(user_input)
   with st.chat_message("assistant"):
@@ -146,4 +146,8 @@ if st.sidebar.button('Get Evaluation Metric'):
     if len(query_response_pairs) == 0:
       st.write("No data to evaluate!")
     else:
+      query_response_pairs = []
+      for message in st.session_state.messages:
+        query_response_pairs.append([message["role"], [message["content"])
       st.write(query_response_pairs)
+        
