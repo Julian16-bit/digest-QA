@@ -148,6 +148,6 @@ if st.sidebar.button('Get Evaluation Metric'):
     else:
       query_response_pairs = []
       for message in st.session_state.messages:
-        query_response_pairs.append([message["role"], [message["content"])
+        query_response_pairs.append([message["role"]], [message["content"]])
       st.write(query_response_pairs)
         
