@@ -80,7 +80,12 @@ def create_prompt(query):
 
 def clear_chat_history():
     st.session_state.messages = []
+
+def evaluation(query_response_pairs):
+  pass
+  
 st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
+st.sidebar.button('Get Evaluation Metric', on_click=evaluation(query_response_pairs))
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
