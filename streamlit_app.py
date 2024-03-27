@@ -106,8 +106,6 @@ if "messages" not in st.session_state:
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
-      
-query_response_pairs = []
 
 user_input = st.chat_input("Enter your question here")
 if user_input:
@@ -129,7 +127,8 @@ if user_input:
   
   st.session_state.messages.append({"role": "user", "content": user_input})
   st.session_state.messages.append({"role": "assistant", "content": clean_output})
-  
+
+  query_response_pairs = []
   query_response_pairs.append([user_input, clean_output])
       
   st.chat_message("user").markdown(user_input)
