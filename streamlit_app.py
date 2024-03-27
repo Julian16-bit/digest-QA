@@ -143,17 +143,20 @@ if user_input:
 
 if st.sidebar.button('Get Evaluation Metric'):
   with st.sidebar:
-    query_response= []
-    for message in st.session_state.messages:
-      query_response.append(message["content"])
-    query_response_pairs = []
-    for i in range(0, len(query_response), 2):
-      pair = [query_response[i], query_response[i + 1]]
-      query_response_pairs.append(pair)
-      
-    similarity, precision, recall, f1 = evaluation(query_response_pairs)
-    st.write(f"The similarity score is: {round(similarity, 3)}")
-    st.write(f"The precision score is: {round(precision, 3)}")
-    st.write(f"The recall score is: {round(recall, 3)}")
-    st.write(f"The f1 score is: {round(f1, 3)}")
+    if len(st.session_state.messages) == 0:
+      st.write("No messages to evaluate!")
+    else:
+      query_response= []
+      for message in st.session_state.messages:
+        query_response.append(message["content"])
+      query_response_pairs = []
+      for i in range(0, len(query_response), 2):
+        pair = [query_response[i], query_response[i + 1]]
+        query_response_pairs.append(pair)
         
+      similarity, precision, recall, f1 = evaluation(query_response_pairs)
+      st.write(f"The similarity score is: {round(similarity, 3)}")
+      st.write(f"The precision score is: {round(precision, 3)}")
+      st.write(f"The recall score is: {round(recall, 3)}")
+      st.write(f"The f1 score is: {round(f1, 3)}")
+          
