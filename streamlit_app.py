@@ -25,6 +25,11 @@ with st.sidebar:
     # grade_level = st.selectbox('Choose the level of complexity',('elementary school', 'middle school', 'high school', 'college' ))
     # st.write('You selected:', grade_level)
 
+query_response_pairs = []
+def save_pair(query, answer):
+  global query_response_pairs
+  query_response_pairs.append([query, answer])
+
 def create_prompt(query):
   model_name = 'sentence-transformers/all-MiniLM-L6-v2'
   vect_model = SentenceTransformer(model_name)
@@ -128,8 +133,7 @@ if user_input:
   st.session_state.messages.append({"role": "user", "content": user_input})
   st.session_state.messages.append({"role": "assistant", "content": clean_output})
 
-  query_response_pairs = []
-  query_response_pairs.append([user_input, clean_output])
+  save_pair(user_input, clean_output)
       
   st.chat_message("user").markdown(user_input)
   with st.chat_message("assistant"):
