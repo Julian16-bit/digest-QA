@@ -83,7 +83,9 @@ def clear_chat_history():
 
 def evaluation(query_response_pairs):
   pass
-  
+
+query_response_pairs = []
+
 st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 st.sidebar.button('Get Evaluation Metric', on_click=evaluation(query_response_pairs))
 
