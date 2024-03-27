@@ -136,7 +136,7 @@ if user_input:
 
   message = "test"
   
-  st.sidebar.button('Get Evaluation Metric', on_click=hello(message)
+  st.sidebar.button('Get Evaluation Metric', on_click=hello(message))
       
   st.chat_message("user").markdown(user_input)
   with st.chat_message("assistant"):
