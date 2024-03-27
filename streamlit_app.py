@@ -99,7 +99,6 @@ def evaluation(query_response_pairs):
 
 
 st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
-st.sidebar.button('Get Evaluation Metric', on_click=evaluation(query_response_pairs))
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -131,6 +130,8 @@ if user_input:
   
   query_response_pairs = []
   query_response_pairs.append([user_input, clean_output])
+  
+  st.sidebar.button('Get Evaluation Metric', on_click=evaluation(query_response_pairs))
       
   st.chat_message("user").markdown(user_input)
   with st.chat_message("assistant"):
