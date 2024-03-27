@@ -135,15 +135,13 @@ if user_input:
     st.write(input)
 
   message = "test"
-  
-  st.sidebar.button('Get Evaluation Metric', on_click=hello(message))
       
   st.chat_message("user").markdown(user_input)
   with st.chat_message("assistant"):
       st.markdown(clean_output)
   with st.expander("Click here to see the source"):
     st.write(results)
-  
-  #with col2:
-    #with st.expander("Click here to see the source"):
-      #st.write(results)
+
+if st.sidebar.button('Get Evaluation Metric'):
+  with st.sidebar:
+    st.write(message)
