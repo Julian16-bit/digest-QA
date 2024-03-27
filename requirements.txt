@@ -4,3 +4,4 @@ sentence-transformers==2.2.2
 openai
 accelerate
 evaluate
+bert_score
