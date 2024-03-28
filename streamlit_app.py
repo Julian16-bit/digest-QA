@@ -78,6 +78,9 @@ def create_prompt(query):
   """
   return prompt, results
 
+def clear_chat_history():
+    st.session_state.messages = []
+
 st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 
 if "messages" not in st.session_state:
