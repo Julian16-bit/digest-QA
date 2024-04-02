@@ -39,18 +39,18 @@ def create_prompt(query):
   )
   
   results = []
-  for item in response['data']['Get']['Digest2']:
+  for item in response['data']['Get']['Digest_simplified']:
     result = {
         'doc_id': item['doc_id'],
         'section_title': item['section_title'],
         'section_chapter': item['section_chapter'],
         'score': item['_additional']['score'],
-        'content': item['content']
+        'content': item['content'],
         'simplified_content': item['simplified_content']
     }
     results.append(result)
 
-  query_doc_pairs = [[query, res["simplified_content"]] for res in response["data"]["Get"]["Digest2"]]
+  query_doc_pairs = [[query, res["simplified_content"]] for res in response["data"]["Get"]["Digest_simplified"]]
 
   scores = reranker_model.predict(query_doc_pairs)
   print(scores)
