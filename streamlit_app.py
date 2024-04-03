@@ -74,9 +74,9 @@ def create_prompt(query):
   prompt = f"""
   En tant qu'assistant IA spécialisé dans les tâches de réponse aux questions, votre objectif est d'offrir des réponses informatives et précises basées sur le contexte fourni. Si la réponse ne peut pas être trouvée dans les documents fournis, répondez par « Je n'ai pas de réponse à cette question ». Soyez aussi concis et poli que possible dans votre réponse et utilisez un langage simple. Le contexte fourni contient les principes appliqués dans le programme d'assurance-emploi (AE), et la question est également liée au programme d'AE.
 
-  Context: {content}
+  Contexte: {content}
   Question: {query}
-  Answer:
+  Réponse:
   """
   return prompt, results
 
