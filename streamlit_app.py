@@ -24,10 +24,10 @@ with st.sidebar:
     # st.write('You selected:', grade_level)
 
 def create_prompt(query):
-  tokenizer = AutoTokenizer.from_pretrained('camembert-base')
+  vect_model = SentenceTransformer("dangvantuan/sentence-camembert-base")
   reranker_model = SentenceTransformer('antoinelouis/biencoder-electra-base-french-mmarcoFR')
   query1 = query
-  query_embedding = tokenizer(query)
+  query_embedding = vect_model.encode(query1)
   response = (
   client.query
   .get("Digest2", ["content", "section_title", "doc_id", "section_chapter"])
