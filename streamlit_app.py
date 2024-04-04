@@ -15,13 +15,6 @@ client = weaviate.Client(
 
 st.set_page_config(layout="wide")
 st.markdown("<h1 style='text-align: center; margin-bottom: 100px'>Prestation Q&A Chat</h1>", unsafe_allow_html=True)
-st.markdown("""
-    <style>
-    [data-testid="stSidebar"]{
-    background-color: #CD5454;  
-        }
-    </style>
-""", unsafe_allow_html=True)
 
 with st.sidebar:
     api_token = st.text_input("Entrez votre cle API OpenAI ici:", type='password')
@@ -45,6 +38,7 @@ def create_prompt(query):
   )
   
   results = []
+  
   for item in response['data']['Get']['Digest_french']:
     result = {
         'doc_id': item['doc_id'],
@@ -99,7 +93,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-user_input = st.chat_input("Enter your question here")
+user_input = st.chat_input("Entrez votre question ici")
 if user_input:
   prompt, results = create_prompt(user_input)
   gpt = OpenAI(api_key=api_token)
@@ -115,14 +109,13 @@ if user_input:
   
   output = completion.choices[0].message
   content_output = output.content
-  clean_output = content_output.replace("$", "\$")
   
   st.session_state.messages.append({"role": "user", "content": user_input})
-  st.session_state.messages.append({"role": "assistant", "content": clean_output})
+  st.session_state.messages.append({"role": "assistant", "content": content_output})
   
   st.chat_message("user").markdown(user_input)
   with st.chat_message("assistant"):
-      st.markdown(clean_output)
+      st.markdown(content_output)
   with st.expander("Click here to see the source"):
     st.write(results)
   
