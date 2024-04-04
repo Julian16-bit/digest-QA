@@ -33,7 +33,7 @@ def create_prompt(query):
   .get("Digest2", ["content", "section_title", "doc_id", "section_chapter"])
   .with_hybrid(query=query1, vector=query_embedding)
   .with_additional(["score"])
-  .with_limit(20)
+  .with_limit(30)
   .do()
   )
   
@@ -59,7 +59,7 @@ def create_prompt(query):
   scores = (q_embeddings @ d_embeddings.T)[0]
   print(scores)
 
-  top_n = 5 ### Cap number of documents that are sent to LLM for RAG
+  top_n = 7 ### Cap number of documents that are sent to LLM for RAG
   scores_cp = scores.tolist()
   documents = query_doc_pairs[1]
   content = ""
