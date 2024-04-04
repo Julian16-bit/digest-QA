@@ -38,7 +38,7 @@ def create_prompt(query):
   )
   
   results = []
-  for item in response['data']['Get']['Digest2']:
+  for item in response['data']['Get']['Digest_french']:
     result = {
         'doc_id': item['doc_id'],
         'section_title': item['section_title'],
@@ -50,8 +50,8 @@ def create_prompt(query):
 
   query_doc_pairs = [[],[]]
   
-  query_doc_pairs[0] = [query for res in response["data"]["Get"]["Digest2"]]
-  query_doc_pairs[1] = [res["content"] for res in response["data"]["Get"]["Digest2"]]
+  query_doc_pairs[0] = [query for res in response["data"]["Get"]["Digest_french"]]
+  query_doc_pairs[1] = [res["content"] for res in response["data"]["Get"]["Digest_french"]]
 
   q_embeddings = reranker_model.encode(query_doc_pairs[0], normalize_embeddings=True)
   d_embeddings = reranker_model.encode(query_doc_pairs[1], normalize_embeddings=True)
