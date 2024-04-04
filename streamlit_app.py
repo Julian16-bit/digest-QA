@@ -15,6 +15,13 @@ client = weaviate.Client(
 
 st.set_page_config(layout="wide")
 st.markdown("<h1 style='text-align: center; margin-bottom: 100px'>Prestation Q&A Chat</h1>", unsafe_allow_html=True)
+st.markdown("""
+    <style>
+    [data-testid="stSidebar"]{
+    background-color: #CD5454;  
+        }
+    </style>
+""", unsafe_allow_html=True)
 
 with st.sidebar:
     api_token = st.text_input("Entrez votre cle API OpenAI ici:", type='password')
