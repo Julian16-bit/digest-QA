@@ -6,10 +6,10 @@ from sentence_transformers import SentenceTransformer, CrossEncoder
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from openai import OpenAI
 
-auth_config = weaviate.AuthApiKey(api_key="9tqoCx5yjyrLpRAq288U6l3385oOeW22t3vo") 
+auth_config = weaviate.AuthApiKey(api_key="n6DlRqq6P10UIgGVRAyM64BG8JQbQKvSXzbm") 
  
 client = weaviate.Client(  
-  url="https://french-digest-co42fmv3.weaviate.network",
+  url="https://french-digest-2-n3fdbtx1.weaviate.network",
   auth_client_secret=auth_config 
 )
 
@@ -46,7 +46,7 @@ def create_prompt(query):
   
   results = []
   
-  for item in response['data']['Get']['Digest_french']:
+  for item in response['data']['Get']['Digest_french_2']:
     result = {
         'doc_id': item['doc_id'],
         'section_title': item['section_title'],
@@ -58,8 +58,8 @@ def create_prompt(query):
 
   query_doc_pairs = [[],[]]
   
-  query_doc_pairs[0] = [query for res in response["data"]["Get"]["Digest_french"]]
-  query_doc_pairs[1] = [res["content"] for res in response["data"]["Get"]["Digest_french"]]
+  query_doc_pairs[0] = [query for res in response["data"]["Get"]["Digest_french_2"]]
+  query_doc_pairs[1] = [res["content"] for res in response["data"]["Get"]["Digest_french_2"]]
 
   q_embeddings = reranker_model.encode(query_doc_pairs[0], normalize_embeddings=True)
   d_embeddings = reranker_model.encode(query_doc_pairs[1], normalize_embeddings=True)
