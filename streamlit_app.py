@@ -54,10 +54,10 @@ def create_prompt(query):
   contents = [item['content'] for item in response['data']['Get']['Digest2']]
   formatted_text = '\n'.join([f"Supporting Text {i+1}: {item}" for i, item in enumerate(contents)])
   prompt = f"""
-  As an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses
-  based on the provided context. If the answer cannot be found within the provided documents, respond with 'I don't have
-  an answer for this question.' Be as concise and polite in your response as possible. The provided context contains the
-  principles applied in the Employment Insurance (EI) program, and the question is also related to the EI program.
+  As an AI assistant, specialized in question-answering tasks, your goal is to offer informative and accurate responses
+  based on the provided context. I want you to imagine you're explaining things to someone in 8th grade, so keep your responses clear, simple, and easy to understand. 
+  The provided context contains the principles applied in the Employment Insurance (EI) program, and the question is also related to the EI program.
+  If you can't find the answer, just say 'I don't have an answer for this question.' Remember, be polite and concise in your responses.
 
   context: {formatted_text}
   Question: {query}
@@ -83,7 +83,7 @@ if user_input:
   completion = gpt.chat.completions.create(
   model="gpt-3.5-turbo",
   messages=[
-    {"role": "system", "content": "an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses only based on the provided context. If the answer cannot be found within the provided documents, respond with 'I don't have an answer for this question.' Be as concise and polite in your response as possible. "},
+    {"role": "system", "content": " As an AI assistant, specialized in question-answering tasks, your goal is to offer informative and accurate responses based on the provided context. I want you to imagine you're explaining things to someone in 8th grade, so keep your responses clear, simple, and easy to understand. The provided context contains the principles applied in the Employment Insurance (EI) program, and the question is also related to the EI program. If you can't find the answer, just say 'I don't have an answer for this question.' Remember, be polite and concise in your responses."},
     {"role": "user", "content": prompt}
   ],
     temperature=temperature_selection,
