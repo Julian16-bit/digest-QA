@@ -6,10 +6,10 @@ from sentence_transformers import SentenceTransformer, CrossEncoder
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from openai import OpenAI
 
-auth_config = weaviate.AuthApiKey(api_key="gskNkfvwKamzxSkFDk3b0BDOvLGYLSRTtIsw")
+auth_config = weaviate.AuthApiKey(api_key="7BkxLwIszwkPkEXOrhIfJRlNzD24DlTAv3oG")
 
 client = weaviate.Client(
-  url="https://digest-data-simple-hxxk2cvz.weaviate.network",
+  url="https://digest-data-highschool-b85ppbaa.weaviate.network",
   auth_client_secret=auth_config
 )
 
@@ -38,7 +38,7 @@ def create_prompt(query):
   query_embedding = vect_model.encode(query1)
   response = (
   client.query
-  .get("Digest_simplified", ["content", "simplified_content", "section_title", "doc_id", "section_chapter"])
+  .get("Digest_simple_hs", ["content", "simplified_content", "section_title", "doc_id", "section_chapter"])
   .with_hybrid(query=query1, vector=query_embedding)
   .with_additional(["score"])
   .with_limit(20)
@@ -46,7 +46,7 @@ def create_prompt(query):
   )
   
   results = []
-  for item in response['data']['Get']['Digest_simplified']:
+  for item in response['data']['Get']['Digest_simple_hs']:
     result = {
         'doc_id': item['doc_id'],
         'section_title': item['section_title'],
@@ -57,7 +57,7 @@ def create_prompt(query):
     }
     results.append(result)
 
-  query_doc_pairs = [[query, res["simplified_content"]] for res in response["data"]["Get"]["Digest_simplified"]]
+  query_doc_pairs = [[query, res["simplified_content"]] for res in response["data"]["Get"]["Digest_simple_hs"]]
 
   scores = reranker_model.predict(query_doc_pairs)
   print(scores)
