@@ -58,13 +58,18 @@ def create_prompt(query):
   scores_cp = scores.tolist()
   documents = [pair[1] for pair in query_doc_pairs]
   content = ""
+  content_display = []
 
   for _ in range(top_n):
     index = scores_cp.index(max(scores_cp))
     content += documents[index]
+    content_display.append(documents[index])
 
     del documents[index]
     del scores_cp[index]
+
+  content_set = set(content_display)
+  doc_display = [docs for docs in results if docs['content'].strip() in content_set]
     
   prompt = f"""
   As an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses
@@ -76,7 +81,7 @@ def create_prompt(query):
   Question: {query}
   Answer:
   """
-  return prompt, results
+  return prompt, doc_display
 
 def clear_chat_history():
     st.session_state.messages = []
@@ -92,7 +97,7 @@ for message in st.session_state.messages:
 
 user_input = st.chat_input("Enter your question here")
 if user_input:
-  prompt, results = create_prompt(user_input)
+  prompt, doc_display = create_prompt(user_input)
   gpt = OpenAI(api_key=api_token)
   completion = gpt.chat.completions.create(
   model="gpt-3.5-turbo",
@@ -115,7 +120,7 @@ if user_input:
   with st.chat_message("assistant"):
       st.markdown(clean_output)
   with st.expander("Click here to see the source"):
-    st.write(results)
+    st.write(doc_display)
   
   #with col2:
     #with st.expander("Click here to see the source"):
