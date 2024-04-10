@@ -120,7 +120,7 @@ if user_input:
   with st.chat_message("assistant"):
       st.markdown(clean_output)
   with st.expander("Click here to see the source"):
-    st.write(doc_display.decode('utf-8'))
+    st.write(doc_display)
   
   #with col2:
     #with st.expander("Click here to see the source"):
