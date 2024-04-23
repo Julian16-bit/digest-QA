@@ -6,10 +6,10 @@ from sentence_transformers import SentenceTransformer, CrossEncoder
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from openai import OpenAI
 
-auth_config = weaviate.AuthApiKey(api_key="2Q741Gv3KhNV8poa3ZGWb6vFYbtSJBE5qTYc")
+auth_config = weaviate.AuthApiKey(api_key="Loh8PVqe15qROqiK2jIvXMJzx6pi8Em8rTrs")
 
 client = weaviate.Client(
-  url="https://digest-data-highschool-ys7vvrkw.weaviate.network",
+  url="https://digest-simplified-r1xz8rxe.weaviate.network",
   auth_client_secret=auth_config
 )
 
