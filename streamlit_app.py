@@ -110,5 +110,6 @@ if user_input:
   st.table(df)
 
   if st.button("Generate summary"):
+    clean_output = clean_output
     st.write(clean_output)
           
