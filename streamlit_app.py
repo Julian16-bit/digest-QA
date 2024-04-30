@@ -69,7 +69,7 @@ def create_prompt(query):
     del scores_cp[index]
 
   content_set = set(content_display)
-  doc_display = [docs for docs in results if docs['content'].strip().replace("Ã©", "é") in content_set]
+  doc_display = [docs for docs in results if docs['content'].strip().replace("Ã©", "e") in content_set]
   df = pd.DataFrame.from_dict(doc_display, orient='columns')
     
   prompt = f"""
