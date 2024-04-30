@@ -5,6 +5,7 @@ import weaviate
 from sentence_transformers import SentenceTransformer, CrossEncoder
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from openai import OpenAI
+import pandas as pd
 
 auth_config = weaviate.AuthApiKey(api_key="yxUlngVeQnPqTahq3vTuhBvW7rkMQLAJoSSH")
 
