@@ -53,7 +53,6 @@ def create_prompt(query):
   query_doc_pairs = [[query, res["content"]] for res in response["data"]["Get"]["Digest2"]]
 
   scores = reranker_model.predict(query_doc_pairs)
-  print(scores)
 
   top_n = 5 ### Cap number of documents that are sent to LLM for RAG
   scores_cp = scores.tolist()
