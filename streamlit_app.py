@@ -14,6 +14,7 @@ client = weaviate.Client(
   auth_client_secret=auth_config
 )
 
+st.set_page_config(layout="wide")
 st.markdown("<h1 style='text-align: center; margin-bottom: 100px'>AI-Powered Query Tool for Benefits🍁</h1>", unsafe_allow_html=True)
 
 with st.sidebar:
