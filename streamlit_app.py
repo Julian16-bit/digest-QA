@@ -14,7 +14,7 @@ client = weaviate.Client(
 )
 
 st.set_page_config(layout="wide")
-st.markdown("<h1 style='text-align: center; margin-bottom: 100px'>AI-Powered Query Tool for Benefits :flag-ca </h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; margin-bottom: 100px'>AI-Powered Query Tool for Benefits🍁</h1>", unsafe_allow_html=True)
 
 with st.sidebar:
     api_token = st.text_input("Enter your OpenAI API Token:", type='password')
