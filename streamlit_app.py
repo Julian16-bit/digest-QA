@@ -86,7 +86,7 @@ def create_prompt(query):
 def clear_chat_history():
     pass
 
-user_input = st.text_input("", placeholder="What information are you looking for?", label_visibility="collapsed)
+user_input = st.text_input("", placeholder="What information are you looking for?", label_visibility="collapsed")
 if user_input:
   prompt, doc_display = create_prompt(user_input)
   gpt = OpenAI(api_key=api_token)
