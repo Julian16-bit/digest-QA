@@ -71,6 +71,7 @@ def create_prompt(query):
 
   content_set = set(content_display)
   doc_display = [docs for docs in results if docs['content'].strip() in content_set]
+  df = pd.DataFrame.from_dict(doc_display, orient='columns')
     
   prompt = f"""
   As an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses
@@ -82,7 +83,7 @@ def create_prompt(query):
   Question: {query}
   Answer:
   """
-  return prompt, doc_display
+  return prompt, df
 
 def clear_chat_history():
     pass
@@ -104,5 +105,6 @@ if user_input:
   output = completion.choices[0].message
   content_output = output.content
   clean_output = content_output.replace("$", "\$")
+  st.table(data=df)
   
           
