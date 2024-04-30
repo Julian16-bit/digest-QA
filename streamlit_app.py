@@ -108,6 +108,7 @@ if user_input:
   
   st.table(df)
 
-  st.button("Generate a summary")
+  if st.button("Generate a summary"):
+    st.write("clean_output")
   
           
