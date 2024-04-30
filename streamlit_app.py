@@ -70,7 +70,7 @@ def create_prompt(query):
     del scores_cp[index]
 
   content_set = set(content_display)
-  doc_display = [docs for docs in results if docs['content'].strip() in content_set]
+  doc_display = [docs for docs in results if docs['content'].strip().replace("Ã©", "é") in content_set]
   df = pd.DataFrame.from_dict(doc_display, orient='columns')
     
   prompt = f"""
@@ -105,11 +105,10 @@ if user_input:
   
   output = completion.choices[0].message
   content_output = output.content
-  clean_output = content_output.replace("$", "\$").replace("Ã©", "é")
+  clean_output = content_output.replace("$", "\$")
   
   st.table(df)
 
   if st.button("Generate summary"):
-    clean_output = clean_output
     st.write(clean_output)
           
