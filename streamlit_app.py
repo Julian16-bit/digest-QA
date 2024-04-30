@@ -107,5 +107,7 @@ if user_input:
   clean_output = content_output.replace("$", "\$")
   
   st.table(df)
+
+  st.button("Generate a summary")
   
           
