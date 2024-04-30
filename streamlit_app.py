@@ -105,7 +105,7 @@ if user_input:
   
   output = completion.choices[0].message
   content_output = output.content
-  clean_output = content_output.replace("$", "\$")
+  clean_output = content_output.replace("$", "\$").replace("Ã©", "é")
   
   st.table(df)
 
