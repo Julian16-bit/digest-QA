@@ -5,3 +5,4 @@ openai
 accelerate
 evaluate
 bert_score
+pandas
