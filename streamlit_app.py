@@ -106,10 +106,10 @@ if user_input:
   output = completion.choices[0].message
   content_output = output.content
   clean_output = content_output.replace("$", "\$")
-  
-  st.table(df)
 
   if st.button("Generate a summary"):
     st.write(clean_output)
+  
+  st.table(df)
   
           
