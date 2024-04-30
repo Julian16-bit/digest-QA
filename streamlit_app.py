@@ -71,6 +71,7 @@ def create_prompt(query):
   content_set = set(content_display)
   doc_display = [docs for docs in results if docs['content'].strip() in content_set]
   df = pd.DataFrame.from_dict(doc_display, orient='columns')
+  df['content'] = df['content'].str.replace('Ã©', 'e', regex=False) 
     
   prompt = f"""
   As an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses
