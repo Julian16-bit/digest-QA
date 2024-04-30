@@ -84,18 +84,9 @@ def create_prompt(query):
   return prompt, doc_display
 
 def clear_chat_history():
-    st.session_state.messages = []
+    pass
 
-st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
-
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-
-user_input = st.chat_input("Enter your question here")
+user_input = st.text_input("Enter your question here")
 if user_input:
   prompt, doc_display = create_prompt(user_input)
   gpt = OpenAI(api_key=api_token)
@@ -113,16 +104,4 @@ if user_input:
   content_output = output.content
   clean_output = content_output.replace("$", "\$")
   
-  st.session_state.messages.append({"role": "user", "content": user_input})
-  st.session_state.messages.append({"role": "assistant", "content": clean_output})
-  
-  st.chat_message("user").markdown(user_input)
-  with st.chat_message("assistant"):
-      st.markdown(clean_output)
-  with st.expander("Click here to see the source"):
-    st.write(doc_display)
-  
-  #with col2:
-    #with st.expander("Click here to see the source"):
-      #st.write(results)
           
