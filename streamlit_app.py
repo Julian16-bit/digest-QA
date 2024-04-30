@@ -90,7 +90,7 @@ def clear_chat_history():
 
 user_input = st.text_input("", placeholder="What information are you looking for?", label_visibility="collapsed")
 if user_input:
-  prompt, doc_display = create_prompt(user_input)
+  prompt, df = create_prompt(user_input)
   gpt = OpenAI(api_key=api_token)
   completion = gpt.chat.completions.create(
   model="gpt-3.5-turbo",
