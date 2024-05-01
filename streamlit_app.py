@@ -88,7 +88,7 @@ def create_prompt(query):
 def clear_chat_history():
     pass
 
-user_input = st.text_input("", placeholder="🔍 Search", label_visibility="collapsed")
+user_input = st.text_input("", placeholder="🔍 What information are you looking for?", label_visibility="collapsed")
 
 if user_input:
   prompt, df = create_prompt(user_input)
