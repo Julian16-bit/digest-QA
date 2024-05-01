@@ -110,6 +110,5 @@ if user_input:
   st.table(df)
 
   if st.button("Generate summary"):
-    with st.spinner("Loading..."):
-      st.write(clean_output)
+    st.write(clean_output)
           
