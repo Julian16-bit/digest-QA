@@ -7,10 +7,10 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from openai import OpenAI
 import pandas as pd
 
-auth_config = weaviate.AuthApiKey(api_key="yxUlngVeQnPqTahq3vTuhBvW7rkMQLAJoSSH")
+auth_config = weaviate.AuthApiKey(api_key="MnL69f0WTRBY5EBnQjh2JZykUfJEvwZV46og")
 
 client = weaviate.Client(
-  url="https://digest-english-t6pnsfgq.weaviate.network",
+  url="https://digest-data-english-4tcrqomv.weaviate.network",
   auth_client_secret=auth_config
 )
 
