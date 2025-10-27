@@ -6,10 +6,10 @@ from sentence_transformers import SentenceTransformer, CrossEncoder
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from openai import OpenAI
 
-auth_config = weaviate.AuthApiKey(api_key="NVlTamdubHlwekVOSnhxdV9yTkd3WUdXTzVVN3Riam93UzRBR0lwVGVxTkFqMnEwaENZbE5penJpb09BPV92MjAw")
+auth_config = weaviate.AuthApiKey(api_key="UVZFZXdnR1pjTHZIUzBNY18wK0hnYm0xSmtsNXFLUmsxVjFOaDBkSm8vTFFIRWxrZzlGNWN4ckVycExrPV92MjAw")
 
 client = weaviate.Client(
-  url="https://nnvmdlmlsusljtzeyvyzmw.c0.us-west3.gcp.weaviate.cloud",
+  url="https://rhckow5tztfcscvxtsra.c0.us-west3.gcp.weaviate.cloud",
   auth_client_secret=auth_config
 )
 
@@ -18,7 +18,7 @@ st.markdown("<h1 style='text-align: center; margin-bottom: 100px'>Benefits Q&A C
 
 with st.sidebar:
     api_token = st.text_input("Enter your OpenAI API Token:", type='password')
-    temperature_selection = st.sidebar.slider('Temperature', min_value=0.0, max_value=2.0, value=1.0, step=0.05)
+    # temperature_selection = st.sidebar.slider('Temperature', min_value=0.0, max_value=2.0, value=1.0, step=0.05)
     top_p_selection = st.sidebar.slider('Top_p', min_value=0.0, max_value=1.0, value=1.0, step=0.05)
     # grade_level = st.selectbox('Choose the level of complexity',('elementary school', 'middle school', 'high school', 'college' ))
     # st.write('You selected:', grade_level)
@@ -31,7 +31,7 @@ def create_prompt(query):
   query_embedding = vect_model.encode(query1)
   response = (
   client.query
-  .get("Digest2", ["content", "section_title", "doc_id", "section_chapter"])
+  .get("Runbook", ["content", "section_title", "doc_id"])
   .with_hybrid(query=query1, vector=query_embedding)
   .with_additional(["score"])
   .with_limit(20)
@@ -39,17 +39,16 @@ def create_prompt(query):
   )
   
   results = []
-  for item in response['data']['Get']['Digest2']:
+  for item in response['data']['Get']['Runbook']:
     result = {
         'doc_id': item['doc_id'],
         'section_title': item['section_title'],
-        'section_chapter': item['section_chapter'],
         'score': item['_additional']['score'],
         'content': item['content']
     }
     results.append(result)
 
-  query_doc_pairs = [[query, res["content"]] for res in response["data"]["Get"]["Digest2"]]
+  query_doc_pairs = [[query, res["content"]] for res in response["data"]["Get"]["Runbook"]]
 
   scores = reranker_model.predict(query_doc_pairs)
   print(scores)
@@ -74,8 +73,7 @@ def create_prompt(query):
   prompt = f"""
   As an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses
   based on the provided context. If the answer cannot be found within the provided documents, respond with 'I don't have
-  an answer for this question.' Be as concise and polite in your response as possible, and use simple language. The provided context contains the
-  principles applied in the Employment Insurance (EI) program, and the question is also related to the EI program.
+  an answer for this question.' Be as concise and polite in your response as possible, and use simple language. 
 
   Context: {content}
   Question: {query}
@@ -100,12 +98,11 @@ if user_input:
   prompt, doc_display = create_prompt(user_input)
   gpt = OpenAI(api_key=api_token)
   completion = gpt.chat.completions.create(
-  model="gpt-3.5-turbo",
+  model="gpt-5",
   messages=[
     {"role": "system", "content": "an AI assistant specialized in question-answering tasks, your goal is to offer informative and accurate responses only based on the provided context. If the answer cannot be found within the provided documents, respond with 'I don't have an answer for this question.' Be as concise and polite in your response as possible. "},
     {"role": "user", "content": prompt}
   ],
-    temperature=temperature_selection,
     top_p=top_p_selection
   )
   
