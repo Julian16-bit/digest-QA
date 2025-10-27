@@ -6,10 +6,10 @@ from sentence_transformers import SentenceTransformer, CrossEncoder
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from openai import OpenAI
 
-auth_config = weaviate.AuthApiKey(api_key="bWtmdlJnWkxvSURxSnZ2Zl9qZUcyMHQzdHBIZ0tMeXp3WVlIeWdaSXdBcWNEU3I1RUxUQkpRbnhrMkxBPV92MjAw")
+auth_config = weaviate.AuthApiKey(api_key="NVlTamdubHlwekVOSnhxdV9yTkd3WUdXTzVVN3Riam93UzRBR0lwVGVxTkFqMnEwaENZbE5penJpb09BPV92MjAw")
 
 client = weaviate.Client(
-  url="https://ttqcriosr6n00jmyqdnw.c0.us-west3.gcp.weaviate.cloud",
+  url="https://nnvmdlmlsusljtzeyvyzmw.c0.us-west3.gcp.weaviate.cloud",
   auth_client_secret=auth_config
 )
 
