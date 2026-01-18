@@ -15,36 +15,14 @@ An AI-powered question-answering system for Employment Insurance (EI) program in
 - OpenAI API key
 - Weaviate database access
 
-## Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/digest-QA.git
-cd digest-QA
-```
-
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-3. Create a `.env` file in the project root:
-```env
-WEAVIATE_API_KEY=your_weaviate_api_key
-WEAVIATE_URL=your_weaviate_url
-```
-
 ## Usage
 
-Run the Streamlit application:
-```bash
-streamlit run streamlit_app.py
-```
+Run the Streamlit Cloud application at this URL:
+https://digest-app-default-rerank.streamlit.app
 
 The app will:
 1. Load embedding and reranking models on startup
-2. Open in your browser at `http://localhost:8501`
-3. Prompt you to enter your OpenAI API token in the sidebar
+2. Prompt you to enter your OpenAI API token in the sidebar
 
 ## Project Structure
 
@@ -67,16 +45,3 @@ Adjust parameters in `src/retrieval.py`:
 - `TOP_N_RESULTS`: Number of documents to use for RAG (default: 5)
 - `EMBEDDING_MODEL`: Sentence transformer model
 - `RERANKER_MODEL`: Cross-encoder reranking model
-
-## Deployment
-
-### Streamlit Cloud
-
-1. Push your code to GitHub
-2. Go to [Streamlit Cloud](https://streamlit.io/cloud)
-3. Deploy your app
-4. Add secrets in app settings:
-```toml
-WEAVIATE_API_KEY = "your_api_key"
-WEAVIATE_URL = "your_weaviate_url"
-```
