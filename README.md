@@ -17,7 +17,7 @@ An AI-powered question-answering system for Employment Insurance (EI) program in
 
 ## Usage
 
-Run the Streamlit Cloud application at this URL:
+Run the Streamlit Cloud application at this URL (requires valid OpenAI API key):
 https://digest-app-default-rerank.streamlit.app
 
 The app will:
